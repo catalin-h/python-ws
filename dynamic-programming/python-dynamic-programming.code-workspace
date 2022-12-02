@@ -41,6 +41,12 @@
 		},
 		{
 			"path": "longest_arithmetic_subsequence"
+		},
+		{
+			"path": "dealing_cards"
+		},
+		{
+			"path": "number_of_ways_to_climb"
 		}
 	],
 	"settings": {}
