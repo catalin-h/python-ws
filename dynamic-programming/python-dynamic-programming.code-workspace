@@ -47,6 +47,9 @@
 		},
 		{
 			"path": "number_of_ways_to_climb"
+		},
+		{
+			"path": "number_paths_through_maze"
 		}
 	],
 	"settings": {}
