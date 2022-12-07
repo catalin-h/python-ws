@@ -15,12 +15,12 @@ def paths(maze: list[list[int]]) -> int:
     # Assume the first cell is not a wall
     previous_row[0] = 1
 
-    # Since we can move from top to bottom 
+    # Since we can move from top to bottom
     # we can iterate from first to last row
     for row in maze:
         next_row = [0] * len(maze[0])
 
-        # Since we can move from left to right 
+        # Since we can move from left to right
         # we iterate from first to last column in current row
         for index, cell in enumerate(row):
 
@@ -83,8 +83,8 @@ class Tests(unittest.TestCase):
 
         # Why C(n + m - 2, n - 1) ?
         # - there are at least n - 1 steps down
-        # - since we move from left to right the total 
-        # number of steps are bound to n + m - 2 steps 
+        # - since we move from left to right the total
+        # number of steps are bound to n + m - 2 steps
         # from first and last cells
         self.assertEqual(paths(maze), math.comb(n + m - 2, n - 1))
 
