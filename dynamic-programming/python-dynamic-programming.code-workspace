@@ -50,6 +50,9 @@
 		},
 		{
 			"path": "number_paths_through_maze"
+		},
+		{
+			"path": "maximum_score_path_through_maze"
 		}
 	],
 	"settings": {}
