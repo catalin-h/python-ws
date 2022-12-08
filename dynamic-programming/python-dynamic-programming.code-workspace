@@ -53,6 +53,9 @@
 		},
 		{
 			"path": "maximum_score_path_through_maze"
+		},
+		{
+			"path": "subarray_sum"
 		}
 	],
 	"settings": {}
