@@ -56,6 +56,9 @@
 		},
 		{
 			"path": "subarray_sum"
+		},
+		{
+			"path": "submatrix_sum"
 		}
 	],
 	"settings": {}
