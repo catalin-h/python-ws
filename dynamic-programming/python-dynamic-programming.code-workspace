@@ -59,6 +59,9 @@
 		},
 		{
 			"path": "submatrix_sum"
+		},
+		{
+			"path": "largest_square_submatrix"
 		}
 	],
 	"settings": {}
