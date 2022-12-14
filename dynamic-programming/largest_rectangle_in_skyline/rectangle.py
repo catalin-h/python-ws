@@ -105,11 +105,35 @@ def find_largest_rectangle(skyline):
 
     return largest_area
 
+def max_rectangle_in_skyline_wrong(skyline: list[int]) -> int:
+    if not skyline:
+        return 0
+
+    max_area = 0
+
+    continous_buildings = 0
+    min_building_height = float('inf')
+
+    for index, building_height in enumerate(skyline):
+        if not building_height:
+            continous_buildings = 0
+            min_building_height = float('inf')
+            continue
+
+        continous_buildings += 1
+        min_building_height = min(min_building_height, building_height)
+        area = continous_buildings * min_building_height
+        max_area = max(max_area, area)
+
+    return max_area
+
 class Tests(unittest.TestCase):
     def tests(self):
         skyline = [1, 3, 5, 4, 2, 5, 1]
         self.assertEqual(max_rectangle_slow(skyline), 10)
         self.assertEqual(max_rectangle_fast(skyline), 10)
+        # self.assertEqual(max_rectangle_in_skyline_wrong(skyline), 10)
+
         skyline = [1, 3, 5, 4, 2, 5, 1, 3]
         self.assertEqual(max_rectangle_slow(skyline), 10)
         self.assertEqual(max_rectangle_fast(skyline), 10)
