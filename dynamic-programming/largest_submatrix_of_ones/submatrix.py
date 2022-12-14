@@ -1,7 +1,8 @@
 import unittest
-import collections
+import sys, os
+import largest_rectangle_in_skyline.rectangle as sk
 
-def max_submatrix_area(matrix: list[list[int]]) -> int:
+def max_submatrix_area_wrong(matrix: list[list[int]]) -> int:
     if not matrix:
         return 0
 
@@ -38,6 +39,31 @@ def max_submatrix_area(matrix: list[list[int]]) -> int:
 
     return max_area
 
+def max_submatrix_area(matrix: list[list[int]]) -> int:
+    if not matrix:
+        return 0
+
+    max_area = 0
+    heights = [0] * len(matrix[0])
+
+    for row in matrix:
+        for index, cell in enumerate(row):
+            # if current cell is zero then reset current height
+            if not cell:
+                heights[index] = 0
+                continue
+
+            # Increase height on each row
+            heights[index] += 1
+
+        # Compute the max rectagle area at this row using
+        # the max rectangle in skyline
+        area = sk.max_rectangle_fast(heights)
+        #area = sk.find_largest_rectangle(heights)
+        max_area = max(max_area, area)
+
+    return max_area
+
 class Tests(unittest.TestCase):
     def test(self):
         mat = [
@@ -49,11 +75,20 @@ class Tests(unittest.TestCase):
         ]
         self.assertEqual(max_submatrix_area(mat), 12)
 
+        mat = [
+            [ 1, 1, 0, 1, 0],
+            [ 1, 1, 1, 1, 1],
+            [ 0, 1, 1, 1, 1],
+            [ 1, 1, 1, 1, 1],
+            [ 1, 1, 1, 0, 1],
+        ]
+        self.assertEqual(max_submatrix_area(mat), 12)
+
     def tests_all(self):
-        rows = 24
-        columns = 14
-        submatrix_width = 7
-        submatrix_height = 9
+        rows = 8
+        columns = 9
+        submatrix_width = 3
+        submatrix_height = 4
 
         mat = [[1 if i < submatrix_height and j < submatrix_width else 0 \
                 for j in range(columns)] \
@@ -65,10 +100,16 @@ class Tests(unittest.TestCase):
             for c in range(columns):
                 # Test only if the square is within main matrix bounds
                 if c + submatrix_width <= columns:
-                    self.assertEqual(max_submatrix_area(mat), submatrix_height * submatrix_width)
+                    self.assertEqual(max_submatrix_area(mat), submatrix_height * submatrix_width, mat)
+
                 # shift right the ones square
                 for row in range(r, r + submatrix_height):
                     mat[row] = mat[row][columns - 1:] + mat[row][:columns - 1]
+
+                # Note: the wrong version fails to find the largest rectangle
+                # because it takes into account the minimum at each row instead
+                # of applying the algorithm from largest rectangle from skyline.
+                mat[r + submatrix_height - 1][c] = 1
 
             # now shift down the square
             mat = mat[rows - 1:] + mat[:rows - 1]
