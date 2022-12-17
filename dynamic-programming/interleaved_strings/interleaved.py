@@ -79,6 +79,9 @@ class Test(unittest.TestCase):
 
 if __name__ == "__main__":
     print(sys.getrecursionlimit())
-    sys.setrecursionlimit(10000)
+    # Default recursion level is 1000 but if the target len is 1000
+    # we need 2016 to launch the tests from CLI and 2027 from VS code
+    # debugger.
+    sys.setrecursionlimit(2027)
     print(sys.getrecursionlimit())
     unittest.main()
