@@ -71,6 +71,9 @@
 		},
 		{
 			"path": "interleaved_strings"
+		},
+		{
+			"path": "regex_matching"
 		}
 	],
 	"settings": {}
